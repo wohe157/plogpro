@@ -58,7 +58,7 @@ class Logger(metaclass=ABCMeta):
         method `log(msg, msg_type)` to actually write a log message to a file.
     """
 
-    def log(self, msg: str, msg_type: LogType = LogType.INFO):
+    def log(self, msg: str, msg_type: LogType = LogType.INFO) -> None:
         """Write a log message
         
         Arguments:
@@ -73,7 +73,7 @@ class Logger(metaclass=ABCMeta):
         self.write_message(message)
 
     @abstractmethod
-    def write_message(self, msg: LogMessage):
+    def write_message(self, msg: LogMessage) -> None:
         pass
 
 
@@ -88,7 +88,7 @@ class TextLogger(Logger):
     Note:
         See `Logger` for more info on how to use the `TextLogger`.
     """
-    
+
     def __init__(self, fname: str, overwrite: bool = False):
         """Create a `TextLogger` instance
         
@@ -100,13 +100,14 @@ class TextLogger(Logger):
                 already exists or to append the messages to the end of the file
                 (default: `False`)
         """
+        super().__init__()
         self.fname = fname
         self.file = open(fname, 'w' if overwrite else 'a')
     
     def __del__(self):
         self.file.close()
 
-    def write_message(self, msg: LogMessage):
+    def write_message(self, msg: LogMessage) -> None:
         output_string  = "[" + msg.type.name.center(10) + "] "
         output_string += msg.timestring + " - " + msg.msg
         self.file.write(output_string + '\n')
@@ -124,7 +125,7 @@ class ConsoleLogger(Logger):
         See `Logger` for more info on how to use the `ConsoleLogger`.
     """
     
-    def write_message(self, msg: LogMessage):
+    def write_message(self, msg: LogMessage) -> None:
         output_string  = "[" + msg.type.name.center(10) + "] "
         output_string += msg.timestring + " - " + msg.msg
         print(output_string)
