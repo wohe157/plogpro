@@ -1,2 +1,2 @@
-# plogger
-A simple and general logger for Python
+# plogpro
+A simple and versatile Python package for logging, profiling and more.
