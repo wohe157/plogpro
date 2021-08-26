@@ -1,16 +1,9 @@
 from __future__ import print_function
 
 from abc        import ABCMeta, abstractmethod
-from enum       import Enum
 from datetime   import datetime
 
-
-class LogType(Enum):
-    DEBUG   = 1
-    INFO    = 2
-    WARNING = 3
-    ERROR   = 4
-    FATAL   = 5
+from .settings  import LogType
 
 
 class LogMessage:
@@ -78,7 +71,7 @@ class Logger(metaclass=ABCMeta):
         """
         message = LogMessage(msg, msg_type)
         self.write_message(message)
-    
+
     @abstractmethod
     def write_message(self, msg: LogMessage):
         pass
