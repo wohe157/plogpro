@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 from abc        import ABCMeta, abstractmethod
 from enum       import Enum
 from datetime   import datetime
@@ -89,6 +91,9 @@ class TextLogger(Logger):
     ```
     [  <Type>  ] <Date> <Time> - <Message>
     ```
+    
+    Note:
+        See `Logger` for more info on how to use the `TextLogger`.
     """
     
     def __init__(self, fname: str, overwrite: bool = False):
@@ -101,9 +106,6 @@ class TextLogger(Logger):
                 Whether to overwrite the contents of the output file if it
                 already exists or to append the messages to the end of the file
                 (default: `False`)
-        
-        Note:
-            See `Logger` for more info on how to use the `TextLogger`.
         """
         self.fname = fname
         self.file = open(fname, 'w' if overwrite else 'a')
@@ -115,3 +117,21 @@ class TextLogger(Logger):
         output_string  = "[" + msg.type.name.center(10) + "] "
         output_string += msg.timestring + " - " + msg.msg
         self.file.write(output_string + '\n')
+
+
+class ConsoleLogger(Logger):
+    """A logger that writes messages to the console
+    
+    The messages are written with the following syntax:
+    ```
+    [  <Type>  ] <Date> <Time> - <Message>
+    ```
+    
+    Note:
+        See `Logger` for more info on how to use the `ConsoleLogger`.
+    """
+    
+    def write_message(self, msg: LogMessage):
+        output_string  = "[" + msg.type.name.center(10) + "] "
+        output_string += msg.timestring + " - " + msg.msg
+        print(output_string)
