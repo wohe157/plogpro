@@ -1,54 +1,117 @@
-from enum import Enum
-from datetime import datetime
+from abc        import ABCMeta, abstractmethod
+from enum       import Enum
+from datetime   import datetime
 
 
-class Type(Enum):
-    INFO = 1
-    WARNING = 2
-    ERROR = 3
+class LogType(Enum):
+    DEBUG   = 1
+    INFO    = 2
+    WARNING = 3
+    ERROR   = 4
+    FATAL   = 5
 
 
-class Logger:
-    def __init__(self, fname: str, verbose: bool = False, overwrite: bool = False):
-        """Create a logger that writes log messages to a file
-        
+class LogMessage:
+    """Container class for log messages
+
+    This class contains all the necessary information about a log message and is
+    used to send this information from the base class `Logger` to an actual
+    implementation of a logger. More specifically, when a user calls the `log()`
+    method of a logger, a `LogMessage` will be created and passed on to the
+    `write_message()` implementation.
+
+    The available properties are:
+     - `msg`: The text message given to the `log()` function
+     - `type`: The type of logging, this is an instance of the `LogType` enum
+     - `time`: A `datetime` object with the time of the log message
+     - `timestring`: A formatted string with the date and time of the message
+    """
+
+    def __init__(self, msg: str, msg_type: LogType):
+        """Create a `LogMessage` instance
+
         Arguments:
-            fname (str)
-                The name of the output file
-            verbose (bool, optional)
-                Output will also be written to the console if verbose is `True`
-                (default: `False`)
-            overwrite (bool, optional)
-                Whether to overwrite the contents of the output file if it
-                already exists or to append the messages to the end of the file
-                (default: `False`)
+            msg (str)
+                The message
+            msg_type (LogType, optional)
+                The message type that indicates its severity, this should be one
+                of the options given by the enum `LogType`
+                (default: `LogType.INFO`)
         """
-        self.fname = fname
-        self.verbose = verbose
-        self.file = open(fname, 'w' if overwrite else 'a')
-    
-    def __del__(self):
-        self.file.close()
+        if not isinstance(msg, str):
+            raise ValueError("The given message is not a string.")
+        if not isinstance(msg_type, LogType):
+            raise ValueError("The message type is not an instance of the enum \"Type\".")
+        
+        self.msg = msg
+        self.type = msg_type
+        self.time = datetime.now()
+        self.timestring = self.time.strftime("%d/%m/%Y %H:%M:%S")
 
-    def log(self, msg: str, msg_type: Type = Type.INFO):
+
+class Logger(metaclass=ABCMeta):
+    """Base class that provides an interface for different loggers
+
+    To implement a new logger, create a class that inherits from `Logger` and at
+    least has a method `write_message(self, msg)` that accepts one argument: an
+    instance of the `LogMessage` class. The method `log()` should *not* be
+    overwritten.
+
+    Usage:
+        To be able to log messages using a logger of your choice, e.g.
+        `TextLogger`, create an instance of that logger. You can then use the
+        method `log(msg, msg_type)` to actually write a log message to a file.
+    """
+
+    def log(self, msg: str, msg_type: LogType = LogType.INFO):
         """Write a log message
         
         Arguments:
             msg (str)
                 The message
-            msg_type (Type, optional)
+            msg_type (LogType, optional)
                 The message type that indicates its severity, this should be one
-                of the options given by the enum `Type` (default: `Type.INFO`)
+                of the options given by the enum `LogType`
+                (default: `LogType.INFO`)
         """
-        if not isinstance(msg, str):
-            raise ValueError("The given message is not a string.")
-        if not isinstance(msg_type, Type):
-            raise ValueError("The message type is not an instance of the enum \"Type\".")
-        
-        output_string  = "[" + msg_type.name.center(10) + "] "
-        output_string += datetime.now().strftime("%d/%m/%Y %H:%M:%S - ")
-        output_string += msg
+        message = LogMessage(msg, msg_type)
+        self.write_message(message)
+    
+    @abstractmethod
+    def write_message(self, msg: LogMessage):
+        pass
 
+
+class TextLogger(Logger):
+    """A logger that writes messages to a text file
+    
+    The messages are written with the following syntax:
+    ```
+    [  <Type>  ] <Date> <Time> - <Message>
+    ```
+    """
+    
+    def __init__(self, fname: str, overwrite: bool = False):
+        """Create a `TextLogger` instance
+        
+        Arguments:
+            fname (str)
+                The name of the output file
+            overwrite (bool, optional)
+                Whether to overwrite the contents of the output file if it
+                already exists or to append the messages to the end of the file
+                (default: `False`)
+        
+        Note:
+            See `Logger` for more info on how to use the `TextLogger`.
+        """
+        self.fname = fname
+        self.file = open(fname, 'w' if overwrite else 'a')
+    
+    def __del__(self):
+        self.file.close()
+
+    def write_message(self, msg: LogMessage):
+        output_string  = "[" + msg.type.name.center(10) + "] "
+        output_string += msg.timestring + " - " + msg.msg
         self.file.write(output_string + '\n')
-        if self.verbose:
-            print(output_string)
