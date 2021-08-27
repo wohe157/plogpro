@@ -6,30 +6,39 @@ from time import time
 
 class ProgressBar(metaclass=ABCMeta):
     """Base class that provides an interface for progress bars
+
+    To create a progress bar, create an instance of one of its implementations.
+    The progressbar can then be updated by calling the method ``update()``.
     
     To implement a new progress bar, create a class that derives from
-    `ProgressBar` and implement the method `draw()`. This method should draw the
-    progress bar based on the accessible member variables.
-
-    Usage:
-        To create a progress bar, create an instance of one of its
-        implementations. The progressbar can then be updated by calling the
-        method `update()`.
+    ``ProgressBar`` and implement the method ``draw()``. This method should draw
+    the progress bar based on the accessible member variables.
+    
+    Warning:
+        The ``update()`` method should **not** be overwritten.
+        
+    Arguments:
+        nsteps (int)
+            The number of steps that the progressbar will go through
+    
+    Attributes:
+        nsteps (int)
+            The number of steps that the progressbar will go through
+        step (int)
+            The current step of the iteration, going from ``0`` to ``nsteps``
+        start_time (float)
+            The start time of the progress bar in seconds since Epoch
+        current_time (float)
+            The current time of the progress bar in seconds since Epoch
     """
 
-    def __init__(self, nsteps: int):
-        """Create an instance of `ProgressBar`
-        
-        Arguments:
-            nsteps (int)
-                The number of steps that the progressbar will go through
-        """
+    def __init__(self, nsteps):
         self.nsteps = nsteps
         self.step = 0
         self.start_time = time()
         self.current_time = time()
     
-    def update(self, step: int = None) -> None:
+    def update(self, step=None):
         """Update the progressbar
 
         Arguments:
@@ -45,37 +54,35 @@ class ProgressBar(metaclass=ABCMeta):
             self.step = step
         self.draw()
 
-    def progress(self) -> float:
+    def progress(self):
         """Get the progress as a number between 0 and 1
 
         Returns:
-            (float) The progress
+            float: The progress
         """
         return self.step / self.nsteps
     
     @abstractmethod
-    def draw(self) -> None:
+    def draw(self):
         pass
 
 
 class ConsoleProgressBar(ProgressBar):
     """A text-based progress bar for in a terminal or console
+        
+    Arguments:
+        nsteps (int)
+            The number of steps that the progressbar will go through
+        width (int, optional)
+            The width of the progress bar
+            (default: 70)
     """
 
-    def __init__(self, nsteps: int, width: int = 70):
-        """Create an instance of a `ConsoleProgressBar`
-        
-        Arguments:
-            nsteps (int)
-                The number of steps that the progressbar will go through
-            width (int, optional)
-                The width of the progress bar
-                (default: 70)
-        """
+    def __init__(self, nsteps, width=70):
         super().__init__(nsteps)
         self.width = width
 
-    def draw(self) -> None:
+    def draw(self):
         nblocks = round(self.progress() * self.width)
         output_string  = "|" + ('■' * nblocks).ljust(self.width) + "|"
         output_string += " {:d}/{:d}".format(self.step, self.nsteps)
