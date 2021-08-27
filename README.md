@@ -13,4 +13,7 @@ pip install plogpro
 ```
 
 ## Documentation
-Documentation is not yet available online, refer to the docstrings for all information.
+Documentation is available [here](https://plogpro.readthedocs.io/en/stable/) via
+Read the Docs. Refer to the stable version for the latest published version, or
+to the latest version for the most up-to-date documentation with the Github
+repository, which might contain functionality that is not yet published.
