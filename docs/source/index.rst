@@ -1,4 +1,4 @@
-Welcome to plogpro's documentation!
+Welcome to Plogpro's documentation!
 ===================================
 
 Plogpro is a simple and versatile Python package that can be used for logging,
@@ -7,15 +7,21 @@ and extendable.
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Getting Started
 
    installation
    guide
-   api
+
+.. toctree::
+   :maxdepth: 2
+   :caption: API Reference
+   :glob:
+
+   api_reference/*
 
 
 Indices and tables
-==================
+------------------
 
 * :ref:`genindex`
 * :ref:`modindex`
