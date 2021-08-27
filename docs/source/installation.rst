@@ -17,10 +17,10 @@ Using Anaconda
 There is currently no support yet for installation with `conda`, but this is planned to be added in the future.
 
 
-Developpers
------------
+Developers
+----------
 
-Developpers should clone the Plogpro project from Github using::
+Developers should clone the Plogpro project from Github using::
 
     git clone git@github.com:wohe157/plogpro.git
 
