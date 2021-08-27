@@ -64,7 +64,7 @@ class ProgressBar(metaclass=ABCMeta):
     
     @abstractmethod
     def draw(self):
-        pass
+        raise NotImplementedError
 
 
 class ConsoleProgressBar(ProgressBar):

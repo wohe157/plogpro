@@ -77,7 +77,7 @@ class Logger(metaclass=ABCMeta):
 
     @abstractmethod
     def write_message(self, msg):
-        pass
+        raise NotImplementedError
 
 
 class TextLogger(Logger):
