@@ -25,7 +25,8 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Test with unittest and coverage
         run: |
-          coverage -m unittest
+          coverage run -m unittest
+          coverage xml
       # Only upload the coverage report once (for the latest python version) and
       # only on push events, not on pull requests.
       - name: Upload coverage report to Codecov
