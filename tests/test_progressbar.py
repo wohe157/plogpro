@@ -35,3 +35,20 @@ class TestProgressBar(unittest.TestCase):
         self.assertEqual(self.p.step, 0)
         self.p.update(self.nsteps)
         self.assertEqual(self.p.step, self.nsteps)
+
+
+class TestConsoleProgressBar(unittest.TestCase):
+
+    def test_init(self):
+        nsteps = 100
+        width = 70
+        cpb = plogpro.ConsoleProgressBar(nsteps, width)
+        self.assertEqual(cpb.nsteps, nsteps)
+        self.assertEqual(cpb.width, width)
+    
+    def test_no_errors(self):
+        # Check if no errors are raised while using the progressbar
+        nsteps = 100
+        cpb = plogpro.ConsoleProgressBar(nsteps)
+        for _ in range(nsteps):
+            cpb.update()
