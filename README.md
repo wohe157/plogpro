@@ -3,6 +3,7 @@
 
 [![Documentation status](https://readthedocs.org/projects/plogpro/badge/?version=latest)](https://plogpro.readthedocs.io/en/latest/?badge=latest)
 ![Test results](https://github.com/wohe157/plogpro/actions/workflows/unittest.yml/badge.svg)
+[![Coverage](https://codecov.io/gh/wohe157/plogpro/branch/main/graph/badge.svg?token=wr6EfOLLJu)](https://codecov.io/gh/wohe157/plogpro)
 
 # Plogpro
 A simple and versatile Python package for logging, profiling and more.
