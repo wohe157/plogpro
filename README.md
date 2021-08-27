@@ -1,7 +1,8 @@
 [![GitHub version](https://badge.fury.io/gh/wohe157%2Fplogpro.svg)](https://badge.fury.io/gh/wohe157%2Fplogpro)
 [![PyPI version](https://badge.fury.io/py/plogpro.svg)](https://badge.fury.io/py/plogpro)
 
-[![Documentation Status](https://readthedocs.org/projects/plogpro/badge/?version=latest)](https://plogpro.readthedocs.io/en/latest/?badge=latest)
+[![Documentation status](https://readthedocs.org/projects/plogpro/badge/?version=latest)](https://plogpro.readthedocs.io/en/latest/?badge=latest)
+![Test results](https://github.com/wohe157/plogpro/actions/workflows/unittest.yml/badge.svg)
 
 # Plogpro
 A simple and versatile Python package for logging, profiling and more.
