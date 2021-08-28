@@ -1,0 +1,29 @@
+package:
+  name: plogpro
+  version: "{{ load_setup_py_data().version }}"
+
+source:
+  path: .
+
+build:
+  noarch: python
+  number: 0
+  script: python -m pip install --no-deps --ignore-installed .
+
+requirements:
+  host:
+    - python
+    - pip
+  run:
+    - python
+
+test:
+  imports:
+    - plogpro
+
+about:
+  home: https://github.com/wohe157/plogpro
+  doc_url: https://plogpro.readthedocs.io/
+  license: GPLv3
+  license_file: LICENSE
+  summary: "A simple and versatile Python package for logging, profiling and more"

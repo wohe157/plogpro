@@ -1,0 +1,19 @@
+name: Deploy package to Anaconda
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build and Publish to Anaconda
+      uses: MichaelsJP/conda-package-publish-action@v1.0.0
+      with:
+        subDir: '.'
+        AnacondaToken: ${{ secrets.ANACONDA_TOKEN }}
+        platforms: 'all'
+        override: true
+        dry_run: false
