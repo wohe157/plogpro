@@ -10,9 +10,10 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Build and Publish to Anaconda
-      uses: MichaelsJP/conda-package-publish-action@v1.0.0
+      uses: MichaelsJP/conda-package-publish-action@v1.1.0
       with:
         subDir: '.'
         AnacondaToken: ${{ secrets.ANACONDA_TOKEN }}
         platforms: 'all'
         override: true
+        dry_run: false
