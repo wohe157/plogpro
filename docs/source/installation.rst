@@ -15,8 +15,9 @@ Plogpro is available on PyPI, which means that it can easily be installed with
 Using Anaconda
 --------------
 
-There is currently no support yet for installation with ``conda``, but this is
-planned to be added in the future.
+When using Anaconda, you can install Plogpro with::
+
+    conda install plogpro
 
 
 From source
