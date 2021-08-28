@@ -66,6 +66,10 @@ class TestTextLogger(unittest.TestCase):
         if os.path.isfile(self.fname):
             os.remove(self.fname)
 
+    def test_no_errors(self):
+        l = plogpro.TextLogger(self.fname)
+        l.log("Test message")
+
     def test_logfile_created(self):
         l = plogpro.TextLogger(self.fname)
         os.path.isfile(self.fname)
