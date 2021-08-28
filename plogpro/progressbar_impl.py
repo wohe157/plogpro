@@ -4,7 +4,7 @@ from .progressbar import *
 
 class ConsoleProgressBar(ProgressBar):
     """A text-based progress bar for in a terminal or console
-        
+
     Arguments:
         nsteps (int)
             The number of steps that the progressbar will go through

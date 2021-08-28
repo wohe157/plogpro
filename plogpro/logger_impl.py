@@ -4,7 +4,7 @@ from .logger    import *
 
 class TextLogger(Logger):
     """A logger that writes messages to a text file
-    
+
     The messages are written with the following syntax::
 
         [  <Type>  ] <Date> <Time> - <Message>
@@ -22,7 +22,7 @@ class TextLogger(Logger):
         super().__init__()
         self.fname = fname
         self.file = open(fname, 'w' if overwrite else 'a')
-    
+
     def __del__(self):
         self.file.close()
 
@@ -34,12 +34,12 @@ class TextLogger(Logger):
 
 class ConsoleLogger(Logger):
     """A logger that writes messages to the console
-    
+
     The messages are written with the following syntax::
 
         [  <Type>  ] <Date> <Time> - <Message>
     """
-    
+
     def write_message(self, msg):
         output_string  = "[" + msg.type.name.center(10) + "] "
         output_string += msg.timestring + " - " + msg.msg

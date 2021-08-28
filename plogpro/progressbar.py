@@ -7,18 +7,18 @@ class ProgressBar(metaclass=ABCMeta):
 
     To create a progress bar, create an instance of one of its implementations.
     The progressbar can then be updated by calling the method ``update()``.
-    
+
     To implement a new progress bar, create a class that derives from
     ``ProgressBar`` and implement the method ``draw()``. This method should draw
     the progress bar based on the accessible member variables.
-    
+
     Warning:
         The ``update()`` method should **not** be overwritten.
-        
+
     Arguments:
         nsteps (int)
             The number of steps that the progressbar will go through
-    
+
     Attributes:
         nsteps (int)
             The number of steps that the progressbar will go through
@@ -35,7 +35,7 @@ class ProgressBar(metaclass=ABCMeta):
         self.step = 0
         self.start_time = time()
         self.current_time = time()
-    
+
     def update(self, step=None):
         """Update the progressbar
 
@@ -59,7 +59,7 @@ class ProgressBar(metaclass=ABCMeta):
             float: The progress
         """
         return self.step / self.nsteps
-    
+
     @abstractmethod
     def draw(self):
         raise NotImplementedError

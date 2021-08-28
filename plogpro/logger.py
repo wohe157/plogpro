@@ -12,7 +12,7 @@ class LogMessage:
     implementation of a logger. More specifically, when a user calls the
     ``log()`` method of a logger, a ``LogMessage`` will be created and passed on
     to the ``write_message()`` implementation.
-    
+
     Arguments:
         msg (str)
             The message
@@ -37,7 +37,7 @@ class LogMessage:
             raise ValueError("The given message is not a string.")
         if not isinstance(msg_type, LogType):
             raise ValueError("The message type is not an instance of the enum \"Type\".")
-        
+
         self.msg = msg
         self.type = msg_type
         self.time = datetime.now()
@@ -54,14 +54,14 @@ class Logger(metaclass=ABCMeta):
     To implement a new logger, create a class that inherits from ``Logger`` and
     at least has a method ``write_message(self, msg)`` that accepts one
     argument: an instance of the ``LogMessage`` class.
-    
+
     Warning:
         The ``log()`` method should **not** be overwritten.
     """
 
     def log(self, msg, msg_type=LogType.INFO):
         """Write a log message
-        
+
         Arguments:
             msg (str)
                 The message

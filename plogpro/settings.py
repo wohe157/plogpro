@@ -3,7 +3,7 @@ from enum import Enum
 
 class LogType(Enum):
     """An enumeration for indicating the severity of a log message
-    
+
     Attributes:
         DEBUG
             Useful information for debugging only
