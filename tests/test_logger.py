@@ -1,6 +1,7 @@
 import unittest
 import plogpro
 
+import os
 from datetime import datetime
 
 
@@ -54,3 +55,24 @@ class TestLogger(unittest.TestCase):
         self.assertIsNone(l.msg)
         l.log(self.msg)
         self.assertEqual(l.msg.msg, self.msg)
+
+
+class TestTextLogger(unittest.TestCase):
+
+    def setUp(self):
+        self.fname = "logger_test_output.log"
+
+    def tearDown(self):
+        if os.path.isfile(self.fname):
+            os.remove(self.fname)
+
+    def test_logfile_created(self):
+        l = plogpro.TextLogger(self.fname)
+        os.path.isfile(self.fname)
+
+
+class TestConsoleLogger(unittest.TestCase):
+
+    def test_no_errors(self):
+        l = plogpro.ConsoleLogger()
+        l.log("Test message")
