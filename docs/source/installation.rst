@@ -40,11 +40,8 @@ Alternatively, you can use ``setup.py`` directly::
 Developers
 ----------
 
-Developers should clone the Plogpro project from Github using::
+Developers should clone the Plogpro project from Github and install it locally::
 
     git clone git@github.com:wohe157/plogpro.git
-
-The ``plogpro`` package is then available in the directory ``plogpro/plogpro``,
-it can be installed locally using ``pip``::
-
+    cd plogpro
     pip install --editable .
