@@ -17,7 +17,7 @@ Using Anaconda
 
 When using Anaconda, you can install Plogpro with::
 
-    conda install plogpro
+    conda install -c wohe plogpro
 
 
 From source
