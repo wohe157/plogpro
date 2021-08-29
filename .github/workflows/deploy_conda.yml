@@ -5,13 +5,13 @@ on:
     types: [published]
 
 jobs:
-  publish:
+  deploy:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Build and Publish to Anaconda
       uses: fcakyon/conda-publish-action@v1.3
       with:
-        subdir: 'conda'
+        subdir: '.'
         anacondatoken: ${{ secrets.ANACONDA_TOKEN }}
         platforms: 'win osx linux'
