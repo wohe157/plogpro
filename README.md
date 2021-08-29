@@ -30,7 +30,7 @@ Refer to the [docs](https://plogpro.readthedocs.io/en/stable/) for more informat
 Documentation
 -------------
 
-| version | Status |
+| Version | Status |
 | ------- | ------ |
 | Stable  | [![Documentation status](https://readthedocs.org/projects/plogpro/badge/?version=stable)](https://plogpro.readthedocs.io/en/stable/?badge=stable) |
 | Latest  | [![Documentation status](https://readthedocs.org/projects/plogpro/badge/?version=latest)](https://plogpro.readthedocs.io/en/latest/?badge=latest) |
