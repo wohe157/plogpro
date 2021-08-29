@@ -5,15 +5,13 @@ on:
     types: [published]
 
 jobs:
-  deploy:
+  publish:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Build and Publish to Anaconda
-      uses: MichaelsJP/conda-package-publish-action@v1.1.0
+      uses: fcakyon/conda-publish-action@v1.3
       with:
-        subDir: '.'
-        AnacondaToken: ${{ secrets.ANACONDA_TOKEN }}
-        platforms: 'all'
-        override: true
-        dry_run: false
+        subdir: 'conda'
+        anacondatoken: ${{ secrets.ANACONDA_TOKEN }}
+        platforms: 'win osx linux'
