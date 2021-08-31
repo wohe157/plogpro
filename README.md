@@ -1,8 +1,9 @@
 Plogpro
 =======
 
-![Test results](https://github.com/wohe157/plogpro/actions/workflows/unittest.yml/badge.svg)
-[![Coverage](https://codecov.io/gh/wohe157/plogpro/branch/main/graph/badge.svg?token=wr6EfOLLJu)](https://codecov.io/gh/wohe157/plogpro)
+![License](https://img.shields.io/github/license/wohe157/plogpro?color=blue)
+![Tests](https://img.shields.io/github/workflow/status/wohe157/plogpro/tests?label=Tests)
+[![Coverage](https://img.shields.io/codecov/c/github/wohe157/plogpro?token=wr6EfOLLJu)](https://codecov.io/gh/wohe157/plogpro)
 
 A simple and versatile Python package for logging, profiling and more.
 
@@ -10,11 +11,9 @@ A simple and versatile Python package for logging, profiling and more.
 Installation
 ------------
 
-| Package Manager | Version |
-| --------------- | ------- |
-| Github Release  | [![GitHub version](https://badge.fury.io/gh/wohe157%2Fplogpro.svg)](https://badge.fury.io/gh/wohe157%2Fplogpro) |
-| PyPI            | [![PyPI version](https://badge.fury.io/py/plogpro.svg)](https://badge.fury.io/py/plogpro) |
-| Anaconda        | [![Anaconda version](https://anaconda.org/wohe/plogpro/badges/version.svg)](https://anaconda.org/wohe/plogpro) |
+[![GitHub release](https://img.shields.io/github/v/release/wohe157/plogpro?include_prereleases&label=Github%20Release)](https://github.com/wohe157/plogpro/releases)
+[![PyPI](https://img.shields.io/pypi/v/plogpro?label=PyPI)](https://pypi.org/project/plogpro/)
+[![Anaconda](https://img.shields.io/conda/v/wohe/plogpro?label=Anaconda)](https://anaconda.org/wohe/plogpro)
 
 Install with `pip`:
 ```
@@ -30,10 +29,8 @@ Refer to the [docs](https://plogpro.readthedocs.io/en/stable/) for more informat
 Documentation
 -------------
 
-| Version | Status |
-| ------- | ------ |
-| Stable  | [![Documentation status](https://readthedocs.org/projects/plogpro/badge/?version=stable)](https://plogpro.readthedocs.io/en/stable/?badge=stable) |
-| Latest  | [![Documentation status](https://readthedocs.org/projects/plogpro/badge/?version=latest)](https://plogpro.readthedocs.io/en/latest/?badge=latest) |
+[![Read the Docs (version)](https://img.shields.io/readthedocs/plogpro/stable?label=Docs%20%28stable%29)](https://plogpro.readthedocs.io/en/stable/?badge=stable)
+[![Read the Docs (version)](https://img.shields.io/readthedocs/plogpro/latest?label=Docs%20%28latest%29)](https://plogpro.readthedocs.io/en/latest/?badge=latest)
 
 Documentation is available [here](https://plogpro.readthedocs.io/en/stable/) via
 Read the Docs. Refer to the stable version for the latest published version, or
