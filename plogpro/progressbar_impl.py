@@ -14,8 +14,8 @@ class ConsoleProgressBar(ProgressBar):
     """
 
     def __init__(self, nsteps, width=70):
-        super().__init__(nsteps)
         self.width = width
+        super().__init__(nsteps)
 
     def draw(self):
         nblocks = round(self.progress() * self.width)

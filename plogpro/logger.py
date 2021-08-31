@@ -53,11 +53,25 @@ class Logger(metaclass=ABCMeta):
 
     To implement a new logger, create a class that inherits from ``Logger`` and
     at least has a method ``write_message(self, msg)`` that accepts one
-    argument: an instance of the ``LogMessage`` class.
+    argument: an instance of the ``LogMessage`` class. If you need to do
+    anything once in the beginning or the and, you can override the ``setup()``
+    and/or ``teardown()`` methods respectively.
 
     Warning:
         The ``log()`` method should **not** be overwritten.
     """
+
+    def __init__(self):
+        self.setup()
+
+    def __del__(self):
+        self.teardown()
+
+    def setup(self):
+        pass
+
+    def teardown(self):
+        pass
 
     def log(self, msg, msg_type=LogType.INFO):
         """Write a log message

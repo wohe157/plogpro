@@ -10,7 +10,9 @@ class ProgressBar(metaclass=ABCMeta):
 
     To implement a new progress bar, create a class that derives from
     ``ProgressBar`` and implement the method ``draw()``. This method should draw
-    the progress bar based on the accessible member variables.
+    the progress bar based on the accessible member variables. If you need to do
+    anything once in the beginning or the and, you can override the ``setup()``
+    and/or ``teardown()`` methods respectively.
 
     Warning:
         The ``update()`` method should **not** be overwritten.
@@ -35,6 +37,16 @@ class ProgressBar(metaclass=ABCMeta):
         self.step = 0
         self.start_time = time()
         self.current_time = time()
+        self.setup()
+
+    def __del__(self):
+        self.teardown()
+
+    def setup(self):
+        pass
+
+    def teardown(self):
+        pass
 
     def update(self, step=None):
         """Update the progressbar

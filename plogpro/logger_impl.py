@@ -19,11 +19,14 @@ class TextLogger(Logger):
     """
 
     def __init__(self, fname, overwrite=False):
-        super().__init__()
         self.fname = fname
-        self.file = open(fname, 'w' if overwrite else 'a')
+        self.overwrite = overwrite
+        super().__init__()
 
-    def __del__(self):
+    def setup(self):
+        self.file = open(self.fname, 'w' if self.overwrite else 'a')
+
+    def teardown(self):
         self.file.close()
 
     def write_message(self, msg):

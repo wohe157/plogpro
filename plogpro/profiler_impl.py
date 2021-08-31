@@ -18,12 +18,15 @@ class TracingProfiler(Profiler):
     """
 
     def __init__(self, fname):
+        self.fname = fname
         super().__init__()
-        self.file = open(fname, 'w+')
+
+    def setup(self):
+        self.file = open(self.fname, 'w+')
         self.file.write("{\"otherData\":{},\"traceEvents\":[")
         self.file.flush()
 
-    def __del__(self):
+    def teardown(self):
         # Check if last character is a comma and overwrite it if so
         self.file.seek(self.file.tell() - 1, SEEK_SET)
         if self.file.read() == ',':

@@ -29,7 +29,25 @@ class Profiler(metaclass=ABCMeta):
     * ``name``: the name of the decorated function
     * ``start_time``: the start time in seconds since Epoch
     * ``end_time``: the end time in seconds since Epoch
+
+    If you need to do anything once in the beginning or the and, you can
+    override the ``setup()`` and/or ``teardown()`` methods respectively.
+
+    Warning:
+        The ``profile()`` method should **not** be overwritten.
     """
+
+    def __init__(self):
+        self.setup()
+
+    def __del__(self):
+        self.teardown()
+
+    def setup(self):
+        pass
+
+    def teardown(self):
+        pass
 
     def profile(self, func):
         """Decorator to use for profiling a function
