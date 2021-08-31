@@ -20,4 +20,3 @@ These are the classes that should be used when creating a custom logger.
 
 .. automodule:: plogpro.logger
    :members:
-   
