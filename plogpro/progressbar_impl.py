@@ -31,18 +31,18 @@ class ConsoleProgressBar(ProgressBar):
 
         output_string += " - "
         if estimated_hours > 0:
-            output_string += "{:>02d}:".format(elapsed_hours)
+            output_string += "{:>02d}:".format(elapsed_hours)  # pragma: no cover
         if estimated_minutes > 0 or estimated_hours > 0:
-            output_string += "{:02d}:".format(elapsed_minutes)
+            output_string += "{:02d}:".format(elapsed_minutes)  # pragma: no cover
         output_string += "{:02d}".format(elapsed_seconds)
         if estimated_minutes == 0 and estimated_hours == 0:
             output_string += "s"
 
         output_string += "/"
         if estimated_hours > 0:
-            output_string += "{:>02d}:".format(estimated_hours)
+            output_string += "{:>02d}:".format(estimated_hours)  # pragma: no cover
         if estimated_minutes > 0 or estimated_hours > 0:
-            output_string += "{:02d}:".format(estimated_minutes)
+            output_string += "{:02d}:".format(estimated_minutes)  # pragma: no cover
         output_string += "{:02d}".format(estimated_seconds)
         if estimated_minutes == 0 and estimated_hours == 0:
             output_string += "s"
