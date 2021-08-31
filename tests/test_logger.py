@@ -26,8 +26,9 @@ class TestLogMessage(unittest.TestCase):
 
     def test_all_types(self):
         for msg_type in plogpro.LogType:
-            instance = plogpro.LogMessage(self.msg, msg_type)
-            self.assertEqual(instance.type, msg_type)
+            with self.subTest(msg_type=msg_type):
+                instance = plogpro.LogMessage(self.msg, msg_type)
+                self.assertEqual(instance.type, msg_type)
 
     def test_wrong_message(self):
         self.assertRaises(ValueError, plogpro.LogMessage, 1, self.type)
