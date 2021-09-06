@@ -1,7 +1,7 @@
 from abc        import ABCMeta, abstractmethod
 from datetime   import datetime
 
-from .settings  import LogType
+from .settings  import config, LogType, ReleaseType
 
 
 class LogMessage:
@@ -62,10 +62,12 @@ class Logger(metaclass=ABCMeta):
     """
 
     def __init__(self):
-        self.setup()
+        if config["release"] < ReleaseType.RELEASE_QUIET:
+            self.setup()
 
     def __del__(self):
-        self.teardown()
+        if config["release"] < ReleaseType.RELEASE_QUIET:
+            self.teardown()
 
     def setup(self):
         pass
@@ -84,6 +86,10 @@ class Logger(metaclass=ABCMeta):
                 of the options given by the enumeration ``LogType``
                 (default: ``LogType.INFO``)
         """
+        if ((config["release"] == ReleaseType.RELEASE_QUIET) or
+                (config["release"] == ReleaseType.RELEASE and msg_type >= LogType.ERROR) or
+                (config["release"] == ReleaseType.VERBOSE and msg_type >= LogType.INFO)):
+            return
         message = LogMessage(msg, msg_type)
         self.write_message(message)
 

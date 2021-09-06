@@ -2,6 +2,8 @@ from abc        import ABCMeta, abstractmethod
 from functools  import wraps
 from time       import time
 
+from .settings  import config, LogType, ReleaseType
+
 
 class Profiler(metaclass=ABCMeta):
     """Base class for profilers
@@ -38,10 +40,12 @@ class Profiler(metaclass=ABCMeta):
     """
 
     def __init__(self):
-        self.setup()
+        if config["release"] < ReleaseType.RELEASE_QUIET:
+            self.setup()
 
     def __del__(self):
-        self.teardown()
+        if config["release"] < ReleaseType.RELEASE_QUIET:
+            self.teardown()
 
     def setup(self):
         pass
@@ -52,6 +56,9 @@ class Profiler(metaclass=ABCMeta):
     def profile(self, func):
         """Decorator to use for profiling a function
         """
+        if config["release"] >= ReleaseType.RELEASE:
+            return func
+
         @wraps(func)
         def profiled_func(*args, **kwargs):
             start_time = time()
